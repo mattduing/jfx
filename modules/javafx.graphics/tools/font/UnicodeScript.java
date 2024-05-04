@@ -24,6 +24,7 @@
  */
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -1535,7 +1536,7 @@ public enum UnicodeScript {
 
    public static void main(String args[]) throws Exception {
        BufferedWriter w =
-            new BufferedWriter(new FileWriter(new File("data.javapart")));
+            Files.newBufferedWriter(new File("data.javapart").toPath());
        w.write("   private static int[] data = {"); w.newLine();
        for (int i=0; i<scriptStarts.length;i++) {
            int start   = scriptStarts[i];
