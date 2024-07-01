@@ -28,6 +28,8 @@ package com.sun.glass.ui.ios;
 import com.sun.glass.ui.Clipboard;
 import com.sun.glass.ui.Pixels;
 import com.sun.glass.ui.SystemClipboard;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -367,7 +369,7 @@ class IosSystemClipboard extends SystemClipboard {
     private URL createUrl(String path, String message) {
         URL url = null;
         try {
-            url = new URL(path);
+            url = Urls.create(path, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException ex) {
             System.err.println(message+path);
         }

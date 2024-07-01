@@ -32,6 +32,8 @@
 
 package ensemble.compiletime;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -189,7 +191,7 @@ public class BuildSamplesList {
                 } else if(trimedLine.startsWith("@see")) {
                     sample.apiClasspaths.add(trimedLine.substring(4).trim());
                 } else if(trimedLine.startsWith("@docUrl")) {
-                    sample.docsUrls.add(new URL(trimedLine.substring(7).trim()));
+                    sample.docsUrls.add(Urls.create(trimedLine.substring(7).trim(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
                 } else if(trimedLine.startsWith("@sampleName")) {
                     // todo resolve to a URL
                     sample.name = trimedLine.substring(11).trim();

@@ -31,6 +31,8 @@
  */
 package ensemble.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,7 +50,7 @@ public class Utils {
      */
     public static String loadFile(String url) {
         try {
-            return loadFile(new URL(url));
+            return loadFile(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;

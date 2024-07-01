@@ -25,6 +25,8 @@
 
 package javafx.scene.image;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
@@ -1127,7 +1129,7 @@ public class Image {
             }
 
             // Use URL constructor for validation
-            return new URL(url).toString();
+            return Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString();
         } catch (final IllegalArgumentException | MalformedURLException e) {
             throw new IllegalArgumentException(
                     constructDetailedExceptionMessage("Invalid URL", e), e);

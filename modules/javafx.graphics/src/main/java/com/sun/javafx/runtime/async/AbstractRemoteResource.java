@@ -25,6 +25,8 @@
 
 package com.sun.javafx.runtime.async;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,7 +74,7 @@ public abstract class AbstractRemoteResource<T> extends AbstractAsyncOperation<T
 
     @Override
     public T call() throws IOException {
-        URL u = new URL(url);
+        URL u = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         InputStream stream = null;
         final String protocol = u.getProtocol();
         if(protocol.equals("http") || protocol.equals("https")) {

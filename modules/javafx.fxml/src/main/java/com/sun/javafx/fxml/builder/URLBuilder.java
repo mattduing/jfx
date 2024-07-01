@@ -25,6 +25,8 @@
 
 package com.sun.javafx.fxml.builder;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.AbstractMap;
@@ -78,7 +80,7 @@ public class URLBuilder extends AbstractMap<String, Object> implements Builder<U
                 url = classLoader.getResource(spec);
             } else {
                 try {
-                    url = new URL(spec);
+                    url = Urls.create(spec, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 } catch (MalformedURLException exception) {
                     throw new RuntimeException(exception);
                 }

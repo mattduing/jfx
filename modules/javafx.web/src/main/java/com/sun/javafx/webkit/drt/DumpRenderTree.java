@@ -32,6 +32,8 @@ import com.sun.webkit.*;
 import com.sun.webkit.graphics.*;
 
 import static com.sun.webkit.network.URLs.newURL;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -255,7 +257,7 @@ public final class DumpRenderTree {
         mlog("{runTest: " + file);
         long mainFrame = webPage.getMainFrame();
         try {
-            new URL(file);
+            Urls.create(file, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException ex) {
             file = "file:///" + file;
         }
