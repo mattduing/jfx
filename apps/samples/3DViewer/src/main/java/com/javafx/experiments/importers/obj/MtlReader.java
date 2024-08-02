@@ -31,6 +31,7 @@
  */
 package com.javafx.experiments.importers.obj;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -78,7 +79,7 @@ public class MtlReader {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         String name = "default";
-        while ((line = br.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
             try {
                 if (line.isEmpty() || line.startsWith("#")) {
                     // comments and empty lines are ignored

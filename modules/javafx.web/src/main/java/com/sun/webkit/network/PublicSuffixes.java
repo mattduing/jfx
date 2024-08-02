@@ -27,6 +27,7 @@ package com.sun.webkit.network;
 
 import com.sun.javafx.logging.PlatformLogger;
 import com.sun.javafx.logging.PlatformLogger.Level;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -134,7 +135,7 @@ final class PublicSuffixes {
 
             String line;
             int type = reader.read();
-            while (type != -1 && (line = reader.readLine()) != null) {
+            while (type != -1 && (line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 Rule rule;
                 if (line.startsWith("!")) {
                     line = line.substring(1);

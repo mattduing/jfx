@@ -32,6 +32,7 @@
 
 package ensemble.compiletime;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -302,7 +303,7 @@ public class BuildSamplesList {
             in = new FileInputStream(file);
             BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             String line;
-            while((line = reader.readLine()) != null) {
+            while((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 builder.append(line);
                 builder.append('\n');
             }

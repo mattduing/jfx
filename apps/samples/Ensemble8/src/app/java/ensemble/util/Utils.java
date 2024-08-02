@@ -31,6 +31,7 @@
  */
 package ensemble.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,7 +68,7 @@ public class Utils {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 sb.append(line);
                 sb.append('\n');
             }

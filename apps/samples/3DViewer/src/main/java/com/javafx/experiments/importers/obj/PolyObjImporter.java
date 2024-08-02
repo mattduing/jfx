@@ -33,6 +33,7 @@ package com.javafx.experiments.importers.obj;
 
 
 import com.javafx.experiments.importers.SmoothingGroups;
+import io.github.pixee.security.BoundedLineReader;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Material;
 import javafx.scene.paint.PhongMaterial;
@@ -153,7 +154,7 @@ public class PolyObjImporter {
         String line;
         int currentSmoothGroup = 0;
         String key = "default";
-        while ((line = br.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
             try {
                 if (line.startsWith("g ") || line.equals("g")) {
                     addMesh(key);
