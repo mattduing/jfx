@@ -23,6 +23,7 @@
  * questions.
  */
 
+import io.github.pixee.security.SystemCommand;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -153,7 +154,7 @@ public class ClipboardExtImageTest extends Application {
         Button openTmpButton = new Button("Open TMP dir");
         openTmpButton.setOnAction((ActionEvent) -> {
             try {
-                Runtime.getRuntime().exec(new String[]{"explorer.exe", new File(System.getProperty("java.io.tmpdir")).getAbsolutePath()});
+                SystemCommand.runCommand(Runtime.getRuntime(), new String[]{"explorer.exe", new File(System.getProperty("java.io.tmpdir")).getAbsolutePath()});
             } catch (Exception e) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Failed to open TMP dir");
