@@ -25,6 +25,7 @@
 
 package com.oracle.dalvik;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,7 +55,7 @@ public class AppDataInstaller {
         try {
             // Open the ZipInputStream
             InputStream is = assetManager.open(zipFileName);
-            ZipInputStream zis = new ZipInputStream(is);
+            ZipInputStream zis = ZipSecurity.createHardenedInputStream(is);
 
             // Loop through all the files and folders
             ZipEntry entry = null;
