@@ -25,6 +25,8 @@
 
 package test.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -261,7 +263,7 @@ public class Util {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
                     BufferedReader reader1 = new BufferedReader(new FileReader(wpp));
-                    URL url = new URL(testPolicy);
+                    URL url = Urls.create(testPolicy, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     BufferedReader reader2 = new BufferedReader(new FileReader(url.getFile()));
 
                     String line = null;

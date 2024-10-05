@@ -32,6 +32,8 @@
 package ensemble.compiletime.search;
 
 import ensemble.compiletime.Sample;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -449,7 +451,7 @@ public class BuildEnsembleSearchIndex {
 
     static CharSequence grabWebPage(String url) throws IOException {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream()))) {
             String line;
             while((line = reader.readLine()) != null) {
                 builder.append(line);

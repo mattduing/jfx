@@ -25,6 +25,8 @@
 
 package javafx.css.converter;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import javafx.application.Application;
 import javafx.css.ParsedValue;
 import javafx.css.StyleConverter;
@@ -138,7 +140,7 @@ public final class URLConverter extends StyleConverter<ParsedValue[], String> {
 
                     // stylesheet URI is something like jar:file:
                     URL url = stylesheetUri.toURL();
-                    return new URL(url, resourceUri.getPath());
+                    return Urls.create(url, resourceUri.getPath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 }
             }
 

@@ -32,6 +32,8 @@
 package com.javafx.experiments.importers.maya;
 
 import com.javafx.experiments.importers.SmoothingGroups;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -350,7 +352,7 @@ class Loader {
             if (file.exists()) {
                 filePath = file.toURI().toString();
             } else {
-                filePath = new URL(url, imageFilename).toString();
+                filePath = Urls.create(url, imageFilename, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString();
             }
             image = new Image(filePath);
             if (DEBUG) {

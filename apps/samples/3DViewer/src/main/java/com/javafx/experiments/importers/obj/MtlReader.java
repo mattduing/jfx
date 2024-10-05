@@ -31,6 +31,8 @@
  */
 package com.javafx.experiments.importers.obj;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,7 +62,7 @@ public class MtlReader {
         baseUrl = parentUrl.substring(0,parentUrl.lastIndexOf('/')+1);
         String fileUrl = baseUrl + filename;
         try {
-            URL mtlUrl = new URL(fileUrl);
+            URL mtlUrl = Urls.create(fileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             log("Reading material from filename = " + mtlUrl);
             read(mtlUrl.openStream());
         } catch (FileNotFoundException ex) {

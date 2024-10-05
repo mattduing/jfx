@@ -26,6 +26,8 @@
 package javafx.scene.text;
 
 import com.sun.javafx.scene.text.FontHelper;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.FilePermission;
 import java.io.InputStream;
 import java.net.URL;
@@ -457,7 +459,7 @@ public final class Font {
                                            boolean loadAll) {
         URL url = null;
         try {
-            url = new URL(urlStr); // null string arg. is caught here.
+            url = Urls.create(urlStr, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS); // null string arg. is caught here.
         } catch (Exception e) {
             return null;
         }

@@ -25,6 +25,8 @@
 
 package javafx.scene;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
@@ -268,7 +270,7 @@ public abstract class Cursor {
 
     private static boolean isUrl(final String identifier) {
         try {
-            new URL(identifier);
+            Urls.create(identifier, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (final MalformedURLException e) {
             return false;
         }

@@ -25,6 +25,8 @@
 
 package com.sun.javafx;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.io.File;
@@ -254,7 +256,7 @@ public class PlatformUtil {
             // Strip everything after the last "/" or "\" to get rid of the jar filename
             int lastIndexOfSlash = Math.max(
                     s.lastIndexOf('/'), s.lastIndexOf('\\'));
-            return new File(new URL(s.substring(0, lastIndexOfSlash + 1)).getPath());
+            return new File(Urls.create(s.substring(0, lastIndexOfSlash + 1), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).getPath());
         } catch (MalformedURLException e) {
             return null;
         }
