@@ -25,6 +25,7 @@
 
 package fxml;
 
+import static io.github.pixee.security.XMLInputFactorySecurity.hardenFactory;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -121,7 +122,7 @@ public class TestLoadPerformance extends Application {
     protected void loadStAX(URL location) throws Exception {
         long t0 = System.currentTimeMillis();
 
-        XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+        XMLInputFactory xmlInputFactory = hardenFactory(XMLInputFactory.newInstance());
         xmlInputFactory.setProperty("javax.xml.stream.isCoalescing", true);
 
         InputStream inputStream = location.openStream();
