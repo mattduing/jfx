@@ -25,6 +25,7 @@
 
 package test.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -265,11 +266,11 @@ public class Util {
                     BufferedReader reader2 = new BufferedReader(new FileReader(url.getFile()));
 
                     String line = null;
-                    while ((line = reader1.readLine()) != null) {
+                    while ((line = BoundedLineReader.readLine(reader1, 5_000_000)) != null) {
                         writer.write(line);
                         writer.newLine();
                     }
-                    while ((line = reader2.readLine()) != null) {
+                    while ((line = BoundedLineReader.readLine(reader2, 5_000_000)) != null) {
                         writer.write(line);
                         writer.newLine();
                     }

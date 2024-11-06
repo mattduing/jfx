@@ -24,6 +24,7 @@
  */
 package com.sun.glass.ui.win;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -334,7 +335,7 @@ class HTMLCodec extends InputStream {
         boolean bContinue = true;
 
         for( int  iEntry = 0; iEntry < iEntCount; ++iEntry ){
-            String stLine = bufferedReader.readLine();
+            String stLine = BoundedLineReader.readLine(bufferedReader, 5_000_000);
             if( null==stLine ) {
                 break;
             }

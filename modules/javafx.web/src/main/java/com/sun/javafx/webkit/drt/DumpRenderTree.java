@@ -32,6 +32,7 @@ import com.sun.webkit.*;
 import com.sun.webkit.graphics.*;
 
 import static com.sun.webkit.network.URLs.newURL;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -465,7 +466,7 @@ public final class DumpRenderTree {
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(System.in));
                 String testPath;
-                while ((testPath = in.readLine()) != null) {
+                while ((testPath = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                     drt.runTest(testPath);
                 }
                 in.close();

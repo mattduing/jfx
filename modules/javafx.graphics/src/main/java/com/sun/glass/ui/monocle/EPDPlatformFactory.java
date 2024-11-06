@@ -26,6 +26,7 @@ package com.sun.glass.ui.monocle;
 
 import com.sun.javafx.logging.PlatformLogger;
 import com.sun.javafx.util.Logging;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -76,7 +77,7 @@ class EPDPlatformFactory extends NativePlatformFactory {
         String fbinfo = AccessController.doPrivileged((PrivilegedAction<String>) () -> {
             String line = null;
             try (var reader = new BufferedReader(new FileReader(FB_FILE))) {
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
             } catch (IOException e) {
                 logger.severe("Failed reading " + FB_FILE, e);
             }

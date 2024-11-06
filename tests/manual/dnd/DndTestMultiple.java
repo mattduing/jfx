@@ -24,6 +24,7 @@
  */
 
 
+ import io.github.pixee.security.BoundedLineReader;
  import javafx.application.Application;
  import javafx.scene.Group;
  import javafx.scene.Node;
@@ -136,7 +137,7 @@
 
                  try {
                      BufferedReader reader = new BufferedReader(new FileReader(files.get(0)));
-                     String result = reader.readLine();
+                     String result = BoundedLineReader.readLine(reader, 5_000_000);
                      reader.close();
                      if (!result.contains(TEST_STRING_1)) {
                          target.setText("FAILED - file 1 contents invalid");
@@ -144,7 +145,7 @@
                      }
 
                      reader = new BufferedReader(new FileReader(files.get(1)));
-                     result = reader.readLine();
+                     result = BoundedLineReader.readLine(reader, 5_000_000);
                      reader.close();
                      if (!result.contains(TEST_STRING_2)) {
                          target.setText("FAILED - file 2 contents invalid");

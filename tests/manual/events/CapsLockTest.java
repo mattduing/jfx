@@ -23,6 +23,7 @@
  * questions.
  */
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Optional;
@@ -55,7 +56,7 @@ public class CapsLockTest {
         public void start(Stage stage) throws Exception {
             checkCapsLock(true);
             System.out.println("Disable Caps Lock on your system then press ENTER");
-            reader.readLine();
+            BoundedLineReader.readLine(reader, 5_000_000);
             checkCapsLock(false);
             Platform.exit();
         }
@@ -66,7 +67,7 @@ public class CapsLockTest {
         System.out.println("Enable Caps Lock on your system then press ENTER");
         try {
             reader = new BufferedReader(new InputStreamReader(System.in));
-            reader.readLine();
+            BoundedLineReader.readLine(reader, 5_000_000);
             Application.launch(App.class, args);
         } catch (Exception ex) {
             ex.printStackTrace(System.out);

@@ -26,6 +26,7 @@
 // This file must be kept in sync with Tools/DumpRenderTree/TestOptions.cpp
 package com.sun.javafx.webkit.drt;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ class TestOptions {
         }
         final String testPath = path.replaceFirst("file://", "");
         try (BufferedReader br = new BufferedReader(new FileReader(testPath))) {
-            final String options = br.readLine();
+            final String options = BoundedLineReader.readLine(br, 5_000_000);
             int beginLocation = options.indexOf(BEGIN_STRING);
             if (beginLocation < 0)
                 return;
