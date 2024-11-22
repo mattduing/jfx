@@ -24,6 +24,7 @@
  */
 
 
+ import java.nio.file.Files;
  import javafx.application.Application;
  import javafx.scene.Group;
  import javafx.scene.Node;
@@ -76,10 +77,10 @@
 
              try {
                  // create test files for dnd operation
-                 f1 = File.createTempFile("dnd_test_file_1", ".txt");
+                 f1 = Files.createTempFile("dnd_test_file_1", ".txt").toFile();
                  f1.deleteOnExit();
 
-                 f2 = File.createTempFile("dnd_test_file_2", ".txt");
+                 f2 = Files.createTempFile("dnd_test_file_2", ".txt").toFile();
                  f2.deleteOnExit();
 
                  FileWriter fw = new FileWriter(f1);

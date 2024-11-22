@@ -28,6 +28,7 @@ package com.sun.javafx.webkit;
 import static com.sun.glass.ui.Clipboard.DRAG_IMAGE;
 import static com.sun.glass.ui.Clipboard.DRAG_IMAGE_OFFSET;
 import static com.sun.glass.ui.Clipboard.IE_URL_SHORTCUT_FILENAME;
+import java.nio.file.Files;
 import static javafx.scene.web.WebEvent.ALERT;
 import static javafx.scene.web.WebEvent.RESIZED;
 import static javafx.scene.web.WebEvent.STATUS_CHANGED;
@@ -368,7 +369,7 @@ public final class UIClientImpl implements UIClient {
             if (isImageSource) {
                 String fileExtension = image.getFileExtension();
                 try {
-                    File temp = File.createTempFile("jfx", "." + fileExtension);
+                    File temp = Files.createTempFile("jfx", "." + fileExtension).toFile();
                     temp.deleteOnExit();
                     ImageIO.write(
                         image.toBufferedImage(),

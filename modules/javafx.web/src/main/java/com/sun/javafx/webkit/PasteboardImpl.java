@@ -31,6 +31,7 @@ import com.sun.webkit.graphics.WCImage;
 import com.sun.webkit.graphics.WCImageFrame;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import javafx.scene.image.Image;
 import javafx.scene.input.Clipboard;
@@ -73,7 +74,7 @@ final class PasteboardImpl implements Pasteboard {
             content.putImage(fxImage);
             String fileExtension = img.getFileExtension();
             try {
-                File imageDump = File.createTempFile("jfx", "." + fileExtension);
+                File imageDump = Files.createTempFile("jfx", "." + fileExtension).toFile();
                 imageDump.deleteOnExit();
                 ImageIO.write(img.toBufferedImage(), fileExtension, imageDump);
                 content.putFiles(Arrays.asList(imageDump));
