@@ -27,6 +27,7 @@ package com.sun.webkit.network;
 
 import com.sun.javafx.logging.PlatformLogger;
 import com.sun.javafx.logging.PlatformLogger.Level;
+import io.github.pixee.security.ZipSecurity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -181,7 +182,7 @@ final class PublicSuffixes {
                 if (pubSuffixStream == null) {
                     return null;
                 }
-                ZipInputStream zis = new ZipInputStream(pubSuffixStream);
+                ZipInputStream zis = ZipSecurity.createHardenedInputStream(pubSuffixStream);
                 ZipEntry ze = zis.getNextEntry();
                 while (ze != null) {
                     if (ze.getName().equals(tld)) {
