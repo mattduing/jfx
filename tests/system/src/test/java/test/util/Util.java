@@ -32,6 +32,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -258,7 +259,7 @@ public class Util {
                         tempFile.deleteOnExit();
                     }
 
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+                    BufferedWriter writer = Files.newBufferedWriter(tempFile.toPath());
 
                     BufferedReader reader1 = new BufferedReader(new FileReader(wpp));
                     URL url = new URL(testPolicy);
