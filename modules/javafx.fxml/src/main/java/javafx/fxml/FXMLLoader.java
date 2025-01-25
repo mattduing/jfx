@@ -26,6 +26,7 @@
 package javafx.fxml;
 
 import com.sun.javafx.util.Logging;
+import static io.github.pixee.security.XMLInputFactorySecurity.hardenFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -2596,7 +2597,7 @@ public class FXMLLoader {
 
             // Create the parser
             try {
-                XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+                XMLInputFactory xmlInputFactory = hardenFactory(XMLInputFactory.newInstance());
                 xmlInputFactory.setProperty("javax.xml.stream.isCoalescing", true);
 
                 // Some stream readers incorrectly report an empty string as the prefix
