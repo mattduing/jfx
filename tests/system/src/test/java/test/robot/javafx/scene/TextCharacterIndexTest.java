@@ -25,6 +25,7 @@
 
 package test.robot.javafx.scene;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import javafx.application.Application;
@@ -566,7 +567,7 @@ public class TextCharacterIndexTest {
 
     @BeforeClass
     public static void initFX() {
-        long seed = new Random().nextLong();
+        long seed = new SecureRandom().nextLong();
         System.out.println("seed=" + seed);
         random = new Random(seed);
 

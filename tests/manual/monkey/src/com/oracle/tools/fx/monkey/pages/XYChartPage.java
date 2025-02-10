@@ -24,6 +24,7 @@
  */
 package com.oracle.tools.fx.monkey.pages;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.AreaChart;
@@ -60,7 +61,7 @@ public class XYChartPage extends TestPaneBase {
 
     private ComboBox<Mode> modeSelector;
     private XYChart<?, Number> chart;
-    protected static Random rnd = new Random();
+    protected static Random rnd = new SecureRandom();
 
     public XYChartPage() {
         FX.name(this, "XYChartPage");

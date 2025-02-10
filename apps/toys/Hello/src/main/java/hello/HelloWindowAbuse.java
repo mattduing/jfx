@@ -25,12 +25,8 @@
 
 package hello;
 
-/*
- * A test program to excercise the multithreaded rendering path looking for holes.
- * This application opens a prime window, and then randomly creates/closed popup windows.
- * Doing this means that rendering will be triggered while the FX event thread is working to
- * create/destroy the child windows.
- */
+
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
@@ -65,7 +61,7 @@ public class HelloWindowAbuse extends Application {
     Group topGroup;
     Stage topStage;
     Runnable flicker;
-    Random random = new Random();
+    Random random = new SecureRandom();
     boolean running = true;
     final Object lock = new Object();
     CountDownLatch latch;

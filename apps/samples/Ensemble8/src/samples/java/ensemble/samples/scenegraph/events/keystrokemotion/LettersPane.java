@@ -31,6 +31,7 @@
  */
 package ensemble.samples.scenegraph.events.keystrokemotion;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import javafx.animation.Interpolator;
@@ -117,7 +118,7 @@ public class LettersPane extends Region {
         timeline.play();
     }
 
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     private static float getRandom(double min, double max) {
         return (float) (RANDOM.nextFloat() * (max - min) + min);

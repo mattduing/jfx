@@ -31,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -66,7 +67,7 @@ public class MiscellaneousTest extends TestBase {
         final WebEngine webEngine = createWebEngine();
         Platform.runLater(() -> {
             webEngine.load(format("file://%d.ajax.googleapis.com/ajax",
-                                  new Random().nextInt()));
+                                  new SecureRandom().nextInt()));
         });
         Thread.sleep(200);
         long startTime = System.currentTimeMillis();

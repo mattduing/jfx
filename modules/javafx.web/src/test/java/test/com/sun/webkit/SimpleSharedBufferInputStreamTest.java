@@ -32,6 +32,7 @@ import com.sun.webkit.SharedBufferShim;
 import com.sun.webkit.SimpleSharedBufferInputStream;
 import com.sun.webkit.WebPage;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Random;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -47,7 +48,7 @@ import static org.junit.Assert.fail;
 public class SimpleSharedBufferInputStreamTest {
 
     private static final int SEGMENT_SIZE = 0x1000;
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     private final SharedBuffer sb = SharedBufferShim.createSharedBuffer();
     private final SimpleSharedBufferInputStream is =

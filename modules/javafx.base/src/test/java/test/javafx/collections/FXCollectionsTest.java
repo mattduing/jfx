@@ -25,6 +25,7 @@
 
 package test.javafx.collections;
 
+import java.security.SecureRandom;
 import javafx.beans.InvalidationListener;
 import org.junit.Test;
 
@@ -779,7 +780,7 @@ public class FXCollectionsTest {
         private boolean shallRun = true;
         private V collection;
         private BiConsumer<V, Random> backgroundChanger;
-        private Random rnd = new Random();
+        private Random rnd = new SecureRandom();
 
         public CollectionChangeThread(V collection, BiConsumer<V, Random> backgroundChanger) {
             super("FXCollectionsTest.CollectionChangeThread");

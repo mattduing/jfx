@@ -25,6 +25,7 @@
 package hello;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -464,7 +465,7 @@ public class HelloTableView extends Application {
 
         final Button renameEthanBtn = new Button("Rename Ethan");
         renameEthanBtn.setOnAction(t -> {
-            data.get(2).setFirstName(new BigInteger(40, new Random()).toString(32));
+            data.get(2).setFirstName(new BigInteger(40, new SecureRandom()).toString(32));
             // data.set(2, new Person("Jonathan", "Giles"));
         });
         grid.getChildren().add(renameEthanBtn);

@@ -25,6 +25,7 @@
 
 package test.javafx.scene.control;
 
+import java.security.SecureRandom;
 import static test.com.sun.javafx.scene.control.infrastructure.ControlTestUtils.assertStyleClassContains;
 import static javafx.scene.control.TableColumn.SortType.ASCENDING;
 import static javafx.scene.control.TableColumn.SortType.DESCENDING;
@@ -1148,7 +1149,7 @@ public class TableViewTest {
 
         // set a new comparator
         firstNameCol.setComparator(new Comparator() {
-            Random r =  new Random();
+            Random r =  new SecureRandom();
             @Override public int compare(Object t, Object t1) {
                 return t.toString().compareTo(t1.toString());
             }

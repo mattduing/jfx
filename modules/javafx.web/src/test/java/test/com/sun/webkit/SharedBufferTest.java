@@ -30,6 +30,7 @@ import com.sun.javafx.tk.Toolkit;
 import com.sun.webkit.SharedBuffer;
 import com.sun.webkit.SharedBufferShim;
 import com.sun.webkit.WebPage;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -46,7 +47,7 @@ import static org.junit.Assert.fail;
 public class SharedBufferTest {
 
     private static final int SEGMENT_SIZE = 0x1000;
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
 
     private SharedBuffer sb = SharedBufferShim.createSharedBuffer();

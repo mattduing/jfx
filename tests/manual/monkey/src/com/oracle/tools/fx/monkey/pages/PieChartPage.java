@@ -24,6 +24,7 @@
  */
 package com.oracle.tools.fx.monkey.pages;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -55,7 +56,7 @@ public class PieChartPage extends TestPaneBase {
     private final ObservableList<PieChart.Data> data;
     private final ComboBox<Model> modelSelector;
     private PieChart chart;
-    protected static Random rnd = new Random();
+    protected static Random rnd = new SecureRandom();
 
     public PieChartPage() {
         FX.name(this, "PieChartPage");
@@ -112,7 +113,7 @@ public class PieChartPage extends TestPaneBase {
     }
 
     private void addRandom(ArrayList<Data> a, int max) {
-        Random r = new Random();
+        Random r = new SecureRandom();
         int sz = r.nextInt(max);
         for (int i = 0; i < sz; i++) {
             a.add(new PieChart.Data("N" + i, r.nextDouble()));

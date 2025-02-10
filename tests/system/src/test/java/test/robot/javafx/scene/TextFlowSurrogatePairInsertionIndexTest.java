@@ -25,6 +25,7 @@
 
 package test.robot.javafx.scene;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import javafx.application.Application;
@@ -333,7 +334,7 @@ public class TextFlowSurrogatePairInsertionIndexTest {
 
     @BeforeClass
     public static void initFX() {
-        long seed = new Random().nextLong();
+        long seed = new SecureRandom().nextLong();
         // if any test fails, we can use the seed found in the log to reproduce exact sequence of events
         System.out.println("seed=" + seed);
         random = new Random(seed);

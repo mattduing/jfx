@@ -33,6 +33,7 @@ import static java.lang.String.format;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
 import java.security.Permission;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -73,7 +74,7 @@ public class UserDataDirectoryTest extends TestBase {
 
     private static RandomAccessFile preLockedRaf;
     private static FileLock preLockedLock;
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
 
     private final ArrayList<WebEngine> createdWebEngines = new ArrayList<>();

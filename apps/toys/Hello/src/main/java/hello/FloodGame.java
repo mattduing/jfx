@@ -25,6 +25,7 @@
 
 package hello;
 
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -63,7 +64,7 @@ public class FloodGame extends Application {
         Color.web("#d050ff"),
     };
 
-    static Random rand = new Random();
+    static Random rand = new SecureRandom();
 
     private Color newColor;
     private Cell[] cells = Cell.createCells();

@@ -25,6 +25,7 @@
 
 package test.javafx.scene.layout;
 
+import java.security.SecureRandom;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -1320,7 +1321,7 @@ public class RegionTest {
         stage.setScene(scene);
 
         double[] scales = new double[] {1.0, 1.25, 1.5, 1.75, 2.0, 1.374562997, 20.0};
-        Random random = new Random();
+        Random random = new SecureRandom();
         long seed = random.nextLong();
 
         // test snapSizeX/snapSizeY methods

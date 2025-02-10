@@ -26,6 +26,7 @@ package com.oracle.tools.fx.monkey.pages;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.function.Function;
 import javafx.collections.FXCollections;
@@ -279,7 +280,7 @@ public class ListViewPage extends TestPaneBase implements HasSkinnable {
     }
 
     protected String newVariableItem(Object n) {
-        int rows = 1 << new Random().nextInt(5);
+        int rows = 1 << new SecureRandom().nextInt(5);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < rows; i++) {
             if (i > 0) {

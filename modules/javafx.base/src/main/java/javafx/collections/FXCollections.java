@@ -29,6 +29,7 @@ import com.sun.javafx.collections.ListListenerHelper;
 import com.sun.javafx.collections.MapListenerHelper;
 import com.sun.javafx.collections.SetListenerHelper;
 import java.lang.reflect.Array;
+import java.security.SecureRandom;
 import java.util.AbstractList;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
@@ -636,7 +637,7 @@ public class FXCollections {
      */
     public static void shuffle(ObservableList<?> list) {
         if (r == null) {
-            r = new Random();
+            r = new SecureRandom();
         }
         shuffle(list, r);
     }
