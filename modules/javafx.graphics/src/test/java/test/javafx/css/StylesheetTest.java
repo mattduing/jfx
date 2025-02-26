@@ -26,6 +26,7 @@
 package test.javafx.css;
 
 import com.sun.javafx.css.StyleManager;
+import java.nio.file.Files;
 import javafx.css.StyleConverter.StringStore;
 import javafx.css.converter.EnumConverter;
 import javafx.css.converter.StringConverter;
@@ -609,7 +610,7 @@ public class StylesheetTest {
        try {
            URL url = StylesheetTest.class.getResource("RT-37122.css");
            File source = new File(url.toURI());
-           File target = File.createTempFile("RT_37122_", "bss");
+           File target = Files.createTempFile("RT_37122_", "bss").toFile();
            Stylesheet.convertToBinary(source, target);
            Stylesheet.convertToBinary(source, target);
        } catch (URISyntaxException | IOException e) {
@@ -621,12 +622,12 @@ public class StylesheetTest {
     @Test
     public void testRT_37301() {
         try {
-            File source = File.createTempFile("RT_37301_", "css");
+            File source = Files.createTempFile("RT_37301_", "css").toFile();
             FileWriter writer = new FileWriter(source);
             writer.write("A:dir(rtl) {} B:dir(ltr) {} C {}");
             writer.flush();
             writer.close();
-            File target = File.createTempFile("RT_37301_", "bss");
+            File target = Files.createTempFile("RT_37301_", "bss").toFile();
             Stylesheet.convertToBinary(source, target);
             Stylesheet stylesheet = Stylesheet.loadBinary(target.toURL());
             int good = 0;
