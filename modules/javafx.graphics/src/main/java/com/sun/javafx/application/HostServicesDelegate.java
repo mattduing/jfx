@@ -26,6 +26,7 @@
 package com.sun.javafx.application;
 
 import com.sun.javafx.PlatformUtil;
+import io.github.pixee.security.SystemCommand;
 
 import java.io.File;
 import java.net.URI;
@@ -136,12 +137,12 @@ public abstract class HostServicesDelegate {
         public void showDocument(final String uri) {
             try {
                 if (PlatformUtil.isMac()) {
-                    Runtime.getRuntime().exec(new String[] {
+                    SystemCommand.runCommand(Runtime.getRuntime(), new String[] {
                         "open",
                         uri
                     });
                 } else if (PlatformUtil.isWindows()) {
-                    Runtime.getRuntime().exec(new String[] {
+                    SystemCommand.runCommand(Runtime.getRuntime(), new String[] {
                         "rundll32",
                         "url.dll,FileProtocolHandler",
                         uri
@@ -149,9 +150,8 @@ public abstract class HostServicesDelegate {
                 } else { //assume Unix or Linux
                     String browser = null;
                     for (String b : browsers) {
-                        if (browser == null && Runtime.getRuntime().exec(
-                                new String[]{"which", b}).getInputStream().read() != -1) {
-                            Runtime.getRuntime().exec(new String[]{browser = b, uri});
+                        if (browser == null && SystemCommand.runCommand(Runtime.getRuntime(), new String[]{"which", b}).getInputStream().read() != -1) {
+                            SystemCommand.runCommand(Runtime.getRuntime(), new String[]{browser = b, uri});
                         }
                     }
                     if (browser == null) {
