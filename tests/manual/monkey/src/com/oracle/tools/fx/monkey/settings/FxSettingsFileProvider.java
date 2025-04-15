@@ -26,6 +26,7 @@
 // https://github.com/andy-goryachev/FxDock
 package com.oracle.tools.fx.monkey.settings;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -81,7 +82,7 @@ public class FxSettingsFileProvider implements ISettingsProvider {
 
     private void read(BufferedReader rd) throws IOException {
         String s;
-        while ((s = rd.readLine()) != null) {
+        while ((s = BoundedLineReader.readLine(rd, 5_000_000)) != null) {
             int ix = s.indexOf(SEP);
             if (ix <= 0) {
                 continue;

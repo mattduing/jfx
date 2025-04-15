@@ -26,6 +26,7 @@ package com.sun.media.jfxmedia.locator;
 
 import com.sun.media.jfxmedia.MediaError;
 import com.sun.media.jfxmediaimpl.MediaUtils;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -461,7 +462,7 @@ final class HLSConnectionHolder extends ConnectionHolder {
                 if (reader != null) {
                     boolean result;
                     do {
-                        result = parseLine(reader.readLine());
+                        result = parseLine(BoundedLineReader.readLine(reader, 5_000_000));
                     } while (result);
                 }
             } catch (MalformedURLException e) {

@@ -25,6 +25,7 @@
 
 package com.sun.glass.ui.monocle;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,7 +52,7 @@ class SysFS {
         for (int i = 0; i < capsFiles.length; i++) {
             try {
                 BufferedReader r = new BufferedReader(new FileReader(capsFiles[i]));
-                String s = r.readLine();
+                String s = BoundedLineReader.readLine(r, 5_000_000);
                 r.close();
                 if (s == null) {
                     continue;
@@ -83,7 +84,7 @@ class SysFS {
         File f = new File(sysPath, "device/uevent");
         try {
             BufferedReader r = new BufferedReader(new FileReader(f));
-            for (String line; (line = r.readLine()) != null;) {
+            for (String line; (line = BoundedLineReader.readLine(r, 5_000_000)) != null;) {
                 int i = line.indexOf("=");
                 if (i >= 0) {
                     uevent.put(line.substring(0, i), line.substring(i + 1));
@@ -131,7 +132,7 @@ class SysFS {
     /** Read a comma-separated list of integer values from a file */
     static int[] readInts(String location, int expectedLength) throws IOException {
         BufferedReader r = new BufferedReader(new FileReader(location));
-        String s = r.readLine();
+        String s = BoundedLineReader.readLine(r, 5_000_000);
         r.close();
         if (s != null && s.length() > 0) {
             String[] elements = s.split(",");
@@ -161,7 +162,7 @@ class SysFS {
      */
     static int readInt(String location) throws IOException {
         BufferedReader r = new BufferedReader(new FileReader(location));
-        String s = r.readLine();
+        String s = BoundedLineReader.readLine(r, 5_000_000);
         r.close();
         try {
             if (s != null && s.length() > 0) {

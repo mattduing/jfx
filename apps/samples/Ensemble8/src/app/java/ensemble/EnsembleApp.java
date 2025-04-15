@@ -36,6 +36,7 @@ import ensemble.control.Popover;
 import ensemble.control.SearchBox;
 import ensemble.control.TitledToolBar;
 import ensemble.generated.Samples;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -318,7 +319,7 @@ public class EnsembleApp extends Application {
                         ) {
                     // Checking whether we can read a line from this url
                     // without exception
-                    bufferedReader.readLine();
+                    BoundedLineReader.readLine(bufferedReader, 5_000_000);
                 }
                 Platform.runLater(() -> {
                     // when succeeded add this stylesheet to the scene

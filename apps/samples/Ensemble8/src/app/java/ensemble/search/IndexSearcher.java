@@ -32,6 +32,7 @@
 package ensemble.search;
 
 import ensemble.generated.Samples;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -148,7 +149,7 @@ public class IndexSearcher {
         IndexSearcher indexSearcher = new IndexSearcher();
         while (true) {
             System.out.println("Enter query: ");
-            String line = in.readLine();
+            String line = BoundedLineReader.readLine(in, 5_000_000);
             if (line == null || line.length() == -1) break;
             line = line.trim();
             if (line.length() == 0) break;

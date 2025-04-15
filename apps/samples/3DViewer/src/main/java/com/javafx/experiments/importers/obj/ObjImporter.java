@@ -32,6 +32,7 @@
 package com.javafx.experiments.importers.obj;
 
 import com.javafx.experiments.importers.SmoothingGroups;
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -157,7 +158,7 @@ public class ObjImporter {
         String line;
         int currentSmoothGroup = 0;
         String key = "default";
-        while ((line = br.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
             try {
                 if (line.startsWith("g ") || line.equals("g")) {
                     addMesh(key);

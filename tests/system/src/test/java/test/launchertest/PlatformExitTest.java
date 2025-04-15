@@ -25,6 +25,7 @@
 
 package test.launchertest;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -83,7 +84,7 @@ public class PlatformExitTest {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-        while ((line = reader.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
             stringBuilder = stringBuilder.append(line).append("\n");
         }
         if (stringBuilder.indexOf("Java has been detached") >= 0) {

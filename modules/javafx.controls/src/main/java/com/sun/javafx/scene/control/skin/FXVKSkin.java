@@ -25,6 +25,7 @@
 
 package com.sun.javafx.scene.control.skin;
 
+import io.github.pixee.security.BoundedLineReader;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -1029,7 +1030,7 @@ public class FXVKSkin extends SkinBase<FXVK> {
             // The textual content of the Key
             List<String> charsList = new ArrayList<>(10);
 
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 if (line.length() == 0 || line.charAt(0) == '#') {
                     continue;
                 }
