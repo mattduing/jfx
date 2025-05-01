@@ -31,6 +31,8 @@ import com.sun.javafx.iio.ImageFrame;
 import com.sun.javafx.iio.ImageMetadata;
 import com.sun.javafx.iio.ImageStorage;
 import com.sun.javafx.iio.ImageStorage.ImageType;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -482,7 +484,7 @@ public class ImageTools {
             // ignore exception and try as url.
         }
         if (stream == null) {
-            URL url = new URL(input);
+            URL url = Urls.create(input, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             stream = url.openStream();
         }
         return stream;

@@ -26,6 +26,8 @@
 package javafx.fxml;
 
 import com.sun.javafx.util.Logging;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -413,7 +415,7 @@ public class FXMLLoader {
                             return res.toString();
                         } else {
                             try {
-                                return new URL(FXMLLoader.this.location, aValue).toString();
+                                return Urls.create(FXMLLoader.this.location, aValue, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString();
                             } catch (MalformedURLException e) {
                                 System.err.println(FXMLLoader.this.location + "/" + aValue);
                             }
@@ -1139,7 +1141,7 @@ public class FXMLLoader {
                     throw constructLoadException("Base location is undefined.");
                 }
 
-                location = new URL(FXMLLoader.this.location, source);
+                location = Urls.create(FXMLLoader.this.location, source, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             }
 
             FXMLLoader fxmlLoader = new FXMLLoader(location, resources,
@@ -1559,7 +1561,7 @@ public class FXMLLoader {
                             throw constructLoadException("Base location is undefined.");
                         }
 
-                        location = new URL(FXMLLoader.this.location, source);
+                        location = Urls.create(FXMLLoader.this.location, source, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     }
                     Bindings engineBindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
                     String filename = location.getPath();

@@ -25,6 +25,8 @@
 
 package com.sun.javafx.css;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import javafx.css.ParsedValue;
 import javafx.css.Size;
 import javafx.css.SizeUnits;
@@ -683,7 +685,7 @@ public class ParsedValueImpl<V, T> extends ParsedValue<V,T> {
         } else if (valType == URL) {
             String str = strings[is.readShort()];
             try {
-                URL url = new URL(str);
+                URL url = Urls.create(str, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 return new ParsedValueImpl(url, converter, lookup);
             } catch (MalformedURLException malf) {
                 throw new InternalError("Exception in Value.readBinary: " + malf);

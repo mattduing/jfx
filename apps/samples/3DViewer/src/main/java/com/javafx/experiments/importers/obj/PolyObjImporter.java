@@ -33,6 +33,8 @@ package com.javafx.experiments.importers.obj;
 
 
 import com.javafx.experiments.importers.SmoothingGroups;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Material;
 import javafx.scene.paint.PhongMaterial;
@@ -97,7 +99,7 @@ public class PolyObjImporter {
     public PolyObjImporter(String filename) throws FileNotFoundException, IOException {
         this.objFilename = filename;
         log("Reading filename = " + filename);;
-        read(new URL(filename).openStream());
+        read(Urls.create(filename, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream());
     }
 
     public PolyObjImporter(InputStream inputStream) throws IOException {
