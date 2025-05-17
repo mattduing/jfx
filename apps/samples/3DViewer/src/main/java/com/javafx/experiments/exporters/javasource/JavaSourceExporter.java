@@ -35,6 +35,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -135,7 +136,7 @@ public class JavaSourceExporter {
 
     public void export() {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(outputFile));
+            BufferedWriter out = Files.newBufferedWriter(outputFile.toPath());
 //            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
             StringBuilder nodeVars = new StringBuilder();
             nodeVars.append("    private static Node ");
