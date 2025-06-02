@@ -32,6 +32,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -254,7 +255,7 @@ public class Util {
                         tempFile = new File(workerPatchPolicy +
                                 "_" + baseAppName);
                     } else {
-                        tempFile = File.createTempFile("java", "policy");
+                        tempFile = Files.createTempFile("java", "policy").toFile();
                         tempFile.deleteOnExit();
                     }
 

@@ -33,6 +33,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import javafx.css.CssParser;
@@ -321,7 +322,7 @@ public class CssParserTest {
         File file = null;
 
         try {
-            file = File.createTempFile("CssParserTest", ".css");
+            file = Files.createTempFile("CssParserTest", ".css").toFile();
 
             try (var writer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(file), StandardCharsets.UTF_8))) {

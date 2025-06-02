@@ -27,6 +27,7 @@ package com.sun.scenario.effect.compiler;
 
 import java.io.File;
 import com.sun.scenario.effect.compiler.JSLC.JSLCInfo;
+import java.nio.file.Files;
 import org.junit.Test;
 
 /**
@@ -37,7 +38,7 @@ public class SymbolTest {
     }
 
     static void compile(String s) throws Exception {
-        File tmpfile = File.createTempFile("foo", null);
+        File tmpfile = Files.createTempFile("foo", null).toFile();
         File tmpdir = tmpfile.getParentFile();
         JSLCInfo jslcinfo = new JSLCInfo();
         jslcinfo.outDir = tmpdir.getAbsolutePath();
