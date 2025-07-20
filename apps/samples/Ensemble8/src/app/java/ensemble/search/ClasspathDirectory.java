@@ -31,6 +31,7 @@
  */
 package ensemble.search;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,7 +63,7 @@ public class ClasspathDirectory extends Directory {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("index/listAll.txt")));
             String line;
             List<String> fileNames = new ArrayList<>();
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 String[] parts = line.split(":");
                 fileNames.add(parts[0]);
                 fileLengthMap.put(parts[0], Long.parseLong(parts[1]));

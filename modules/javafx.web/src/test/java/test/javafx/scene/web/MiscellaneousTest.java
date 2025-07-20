@@ -25,6 +25,7 @@
 
 package test.javafx.scene.web;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -404,7 +405,7 @@ public class MiscellaneousTest extends TestBase {
         assertTrue("File does not exist: " + webkitLicense, webkitLicense.exists());
 
         try (final BufferedReader licenseText = new BufferedReader(new FileReader(webkitLicense))) {
-            final String firstLine = licenseText.readLine().trim();
+            final String firstLine = BoundedLineReader.readLine(licenseText, 5_000_000).trim();
             final String webkitVersion = firstLine.substring(firstLine.lastIndexOf(" ") + 2);
             assertTrue("webkitVersion should not be empty", webkitVersion.length() > 0);
             assertTrue("UserAgentString does not contain: " + webkitVersion, userAgentString.contains(webkitVersion));
