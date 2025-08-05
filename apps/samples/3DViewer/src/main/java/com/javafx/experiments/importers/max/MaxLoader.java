@@ -32,6 +32,8 @@
 package com.javafx.experiments.importers.max;
 
 import com.javafx.experiments.importers.Importer;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -305,7 +307,7 @@ public class MaxLoader extends Importer {
     }
 
     public MaxScene loadMaxUrl(String fileUrl) throws IOException{
-        MaxData maxData = new MaxAseParser(new URL(fileUrl).openStream()).data;
+        MaxData maxData = new MaxAseParser(Urls.create(fileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream()).data;
 
         String baseUrl = fileUrl.substring(0,fileUrl.lastIndexOf('/')+1);
 

@@ -32,6 +32,8 @@ import com.sun.javafx.iio.ImageMetadata;
 import com.sun.javafx.iio.ImageStorage.ImageType;
 import com.sun.javafx.iio.common.ImageLoaderImpl;
 import com.sun.javafx.iio.common.ImageTools;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -168,7 +170,7 @@ public class IosImageLoader extends ImageLoaderImpl {
 
         // see if the given URL is valid
         try {
-            final URL url = new URL(urlString);
+            final URL url = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         }
         catch (MalformedURLException mue) {
             throw new IllegalArgumentException("Image loader: Malformed URL!");

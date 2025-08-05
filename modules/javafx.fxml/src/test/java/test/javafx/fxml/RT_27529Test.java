@@ -25,6 +25,8 @@
 
 package test.javafx.fxml;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -66,9 +68,9 @@ public class RT_27529Test {
 
         Widget widget = (Widget)fxmlLoader.load();
         assertEquals(Arrays.asList(new String[]{
-            new URL(fxmlLoader.getLocation(), "a").toString(),
-            new URL(fxmlLoader.getLocation(), "b").toString(),
-            new URL(fxmlLoader.getLocation(), "c").toString()}), widget.getStyles());
+            Urls.create(fxmlLoader.getLocation(), "a", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString(),
+            Urls.create(fxmlLoader.getLocation(), "b", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString(),
+            Urls.create(fxmlLoader.getLocation(), "c", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString()}), widget.getStyles());
     }
 
     @Test

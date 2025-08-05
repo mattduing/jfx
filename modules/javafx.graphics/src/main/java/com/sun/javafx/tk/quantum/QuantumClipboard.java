@@ -25,6 +25,8 @@
 
 package com.sun.javafx.tk.quantum;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -377,11 +379,11 @@ final class QuantumClipboard implements TKClipboard {
                         if (sm != null) {
                             @SuppressWarnings("removal")
                             AccessControlContext context = getAccessControlContext();
-                            URL u = new URL(url);
+                            URL u = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                             String protocol = u.getProtocol();
                             if (protocol.equalsIgnoreCase("jar")) {
                                 String file = u.getFile();
-                                u = new URL(file);
+                                u = Urls.create(file, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                                 protocol = u.getProtocol();
                             }
                             if (protocol.equalsIgnoreCase("file")) {

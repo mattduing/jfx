@@ -31,6 +31,8 @@
  */
 package com.javafx.experiments.jfx3dviewer;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -212,7 +214,7 @@ public class MainController implements Initializable {
     private void load(String fileUrl) {
         try {
             try {
-                loadedPath = new File(new URL(fileUrl).toURI()).getAbsoluteFile();
+                loadedPath = new File(Urls.create(fileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toURI()).getAbsoluteFile();
             } catch (IllegalArgumentException | MalformedURLException | URISyntaxException ignored) {
                 loadedPath = null;
             }
