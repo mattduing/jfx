@@ -32,6 +32,8 @@
 package com.javafx.experiments.importers.obj;
 
 import com.javafx.experiments.importers.SmoothingGroups;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -101,7 +103,7 @@ public class ObjImporter {
     public ObjImporter(String objFileUrl) throws FileNotFoundException, IOException {
         this.objFileUrl = objFileUrl;
         log("Reading filename = " + objFileUrl);
-        read(new URL(objFileUrl).openStream());
+        read(Urls.create(objFileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream());
     }
 
     public ObjImporter(InputStream inputStream) throws IOException {

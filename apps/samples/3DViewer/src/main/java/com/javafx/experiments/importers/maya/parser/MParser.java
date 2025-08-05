@@ -31,6 +31,8 @@
  */
 package com.javafx.experiments.importers.maya.parser;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -411,7 +413,7 @@ public class MParser {
         if (fileName != null && !refs.contains(fileName)) {
             refs.add(fileName);
             try {
-                new MParser(env).parse(new URL(inputSource, fileName));
+                new MParser(env).parse(Urls.create(inputSource, fileName, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

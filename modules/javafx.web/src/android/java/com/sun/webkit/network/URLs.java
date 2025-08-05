@@ -25,6 +25,8 @@
 
 package com.sun.webkit.network;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
@@ -79,7 +81,7 @@ public final class URLs {
     {
         try {
             // Try the standard protocol handler selection procedure
-            return new URL(context, spec);
+            return Urls.create(context, spec, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException ex) {
             // Try WebPane-specific protocol handler, if any
             URLStreamHandler handler = null;
@@ -91,7 +93,7 @@ public final class URLs {
             if (handler == null) {
                 throw ex;
             }
-            return new URL(context, spec, handler);
+            return Urls.create(context, spec, handler, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         }
     }
 }

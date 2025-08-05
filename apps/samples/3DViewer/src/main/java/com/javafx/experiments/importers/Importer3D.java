@@ -31,6 +31,8 @@
  */
 package com.javafx.experiments.importers;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -141,7 +143,7 @@ public final class Importer3D {
         }
 
         if (extension.equals("fxml")) {
-            final Object fxmlRoot = FXMLLoader.load(new URL(fileUrl));
+            final Object fxmlRoot = FXMLLoader.load(Urls.create(fileUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
             if (fxmlRoot instanceof Node) {
                 return new Pair<>((Node) fxmlRoot, null);
             } else if (fxmlRoot instanceof TriangleMesh) {

@@ -25,6 +25,8 @@
 
 package com.sun.javafx.fxml.builder;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -115,7 +117,7 @@ public final class JavaFXFontBuilder extends AbstractMap<String, Object> impleme
                 url = (URL) value;
             } else {
                 try {
-                    url = new URL( value.toString());
+                    url = Urls.create(value.toString(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 } catch( MalformedURLException e) {
                     //TODO Better exception
                     throw new IllegalArgumentException("Invalid url " + value.toString(), e);
